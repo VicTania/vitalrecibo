@@ -1,0 +1,31 @@
+{
+    "name": "kaely/vitalrecibo",
+    "description": "VitalRecibo - Sistema de recibos digitales con QR y validación anti-fraude",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "KaelyTech",
+            "email": "dev@kaely.tech"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^12.0",
+        "filament/filament": "^3.0",
+        "kaely/vitalcomite": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kaely\\VitalRecibo\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kaely\\VitalRecibo\\VitalReciboServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
