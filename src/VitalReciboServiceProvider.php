@@ -27,12 +27,24 @@ class VitalReciboServiceProvider extends ServiceProvider
         // Cargar migraciones
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        // Registrar assets de Filament
+        // Registrar assets de Filament si está disponible y los archivos existen
         if (class_exists(FilamentAsset::class)) {
-            FilamentAsset::register([
-                Css::make('vitalrecibo-styles', __DIR__ . '/../resources/dist/vitalrecibo.css'),
-                Js::make('vitalrecibo-scripts', __DIR__ . '/../resources/dist/vitalrecibo.js'),
-            ], 'kaely/vitalrecibo');
+            $assets = [];
+
+            $cssPath = __DIR__ . '/../resources/dist/vitalrecibo.css';
+            $jsPath = __DIR__ . '/../resources/dist/vitalrecibo.js';
+
+            if (file_exists($cssPath)) {
+                $assets[] = Css::make('vitalrecibo-styles', $cssPath);
+            }
+
+            if (file_exists($jsPath)) {
+                $assets[] = Js::make('vitalrecibo-scripts', $jsPath);
+            }
+
+            if (!empty($assets)) {
+                FilamentAsset::register($assets, 'kaely/vitalrecibo');
+            }
         }
 
         // Cargar vistas
